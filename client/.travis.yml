@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t soheilr/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true soheilr/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "third_docker"
+  env: "Thirddocker-env-1"
+  bucket_name: "elasticbeanstalk-eu-north-1-880115758046"
+  bucket_path: "third_docker"
+  on:
+    branch: master
+  acess_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
+    
+    
