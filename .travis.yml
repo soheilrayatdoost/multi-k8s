@@ -14,13 +14,13 @@ after_success:
   - docker build -t soheilr/multi-nginx ./nginx
   - docker build -t soheilr/multi-server ./server
   - docker build -t soheilr/multi-worker ./worker
-# log in to docker CLI 
-  - echo "$DOCKER_PASSWORD" | docker log -u "$DOCKER_ID" --password-stdin
-# Take the images and push them to docker hub 
+# Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
   - docker push soheilr/multi-client 
-  - docker push -t soheilr/multi-nginx 
-  - docker push -t soheilr/multi-server
-  - docker push -t soheilr/multi-worker 
+  - docker push soheilr/multi-nginx 
+  - docker push soheilr/multi-server
+  - docker push soheilr/multi-worker 
 
 
 deploy:
