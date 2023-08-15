@@ -3,7 +3,7 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t soheilr/docker-react -f ./client/Dockerfile.dev .
+  - docker build -t soheilr/docker-react -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true soheilr/docker-react npm run test
