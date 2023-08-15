@@ -32,6 +32,7 @@ class Fib extends Component {
       index: this.state.index,
     });
     this.setState({ index: '' });
+    window.location.reload();
   };
 
   renderSeenIndexes() {
