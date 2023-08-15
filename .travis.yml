@@ -14,10 +14,23 @@ after_success:
   - docker build -t soheilr/multi-nginx ./nginx
   - docker build -t soheilr/multi-server ./server
   - docker build -t soheilr/multi-worker ./worker
-# log in to docker CLI
+# log in to docker CLI 
   - echo "$DOCKER_PASSWORD" | docker log -u "$DOCKER_ID" --password-stdin
 # Take the images and push them to docker hub 
   - docker push soheilr/multi-client 
   - docker push -t soheilr/multi-nginx 
   - docker push -t soheilr/multi-server
   - docker push -t soheilr/multi-worker 
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "third_docker"
+  env: "Thirddocker-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-880115758046"
+  bucket_path: "third_docker_multi"
+  on:
+    branch: master
+  acess_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
