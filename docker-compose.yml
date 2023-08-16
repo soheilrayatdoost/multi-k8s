@@ -6,39 +6,38 @@ services:
       - POSTGRES_PASSWORD=postgres_password
   redis:
     image: 'redis:latest'
-  client:
-    stdin_open: true
-    image: "soheilr/multi-client"
-    volumes:
-      - /app/node_modules
-      - ./client:/app
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    image: soheilr/multi-nginx
+    ports:
+      - '80:80'
   api:
-    image: "soheilr/multi-server"
+    image: soheilr/multi-server
     volumes:
       - /app/node_modules
       - ./server:/app
     environment:
-      - REDIS_HOST=postgres
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
       - PGUSER=postgres
-      - PGHOST=redis
+      - PGHOST=postgres
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
+  client:
+    stdin_open: true
+    image: soheilr/multi-client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
   worker:
-    image: "soheilr/multi-worker"
+    image: soheilr/multi-worker
     volumes:
       - /app/node_modules
       - ./worker:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-  nginx:
-    image: "soheilr/multi-nginx"
-    depends_on:
-      - api
-      - client
-    restart: always
-    ports:
-      - '80:80'
-  
-
