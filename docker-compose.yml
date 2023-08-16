@@ -13,6 +13,14 @@ services:
     volumes:
       - /app/node_modules
       - ./server:/app
+    environment:
+      - REDIS_HOST=docker-multi-redis.f96tsq.clustercfg.eun1.cache.amazonaws.com
+      - REDIS_PORT=6379
+      - PGUSER=postgres
+      - PGHOST=multi-docker.cypy0wdy0nvq.eu-north-1.rds.amazonaws.com
+      - PGDATABASE=fibvalues
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
   client:
     stdin_open: true
     image: soheilr/multi-client
@@ -24,3 +32,6 @@ services:
     volumes:
       - /app/node_modules
       - ./worker:/app
+    environment:
+      - REDIS_HOST=docker-multi-redis.f96tsq.clustercfg.eun1.cache.amazonaws.com
+      - REDIS_PORT=6379
