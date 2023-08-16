@@ -11,14 +11,25 @@ services:
     volumes:
       - /app/node_modules
       - ./server:/app
+    environment:
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+      - PGUSER=$PGUSER
+      - PGHOST=$PGHOST
+      - PGDATABASE=$PGDATABASE
+      - PGPASSWORD=$PGPASSWORD
+      - PGPORT=$PGPORT
   worker:
     image: "soheilr/multi-worker"
     volumes:
       - /app/node_modules
       - ./worker:/app
+    environment:
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
   nginx:
     image: "soheilr/multi-nginx"
-    depends_on:
+    links:
       - api
       - client
     restart: always
