@@ -12,24 +12,25 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      - REDIS_HOST=$REDIS_HOST
-      - REDIS_PORT=$REDIS_PORT
-      - PGUSER=$PGUSER
-      - PGHOST=$PGHOST
-      - PGDATABASE=$PGDATABASE
-      - PGPASSWORD=$PGPASSWORD
-      - PGPORT=$PGPORT
+      - REDIS_HOST=docker-multi-redis.f96tsq.clustercfg.eun1.cache.amazonaws.com
+      - REDIS_PORT=6379
+      - PGUSER=postgres
+      - PGHOST=multi-docker.cypy0wdy0nvq.eu-north-1.rds.amazonaws.com
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
   worker:
     image: "soheilr/multi-worker"
     volumes:
       - /app/node_modules
       - ./worker:/app
     environment:
-      - REDIS_HOST=$REDIS_HOST
-      - REDIS_PORT=$REDIS_PORT
+      - REDIS_HOST=docker-multi-redis.f96tsq.clustercfg.eun1.cache.amazonaws.com
+
+      - REDIS_PORT=6379
   nginx:
     image: "soheilr/multi-nginx"
-    links:
+    depends_on:
       - api
       - client
     restart: always
