@@ -17,7 +17,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Ya ali
+            bayad berim az inja
           </a>
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other Page</Link>
