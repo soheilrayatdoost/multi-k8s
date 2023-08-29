@@ -1,5 +1,5 @@
 docker build -t soheilr/multi-client:latest -t soheilr/multi-client:$SHA -f ./client/Dockerfile ./client
-docker build -t soheilr/multi-server:latest -t soheilr/multi=server:$SHA -f ./server/Dockerfile ./server
+docker build -t soheilr/multi-server:latest -t soheilr/multi-server:$SHA -f ./server/Dockerfile ./server
 docker build -t soheilr/multi-worker:latest -t soheilr/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
 docker push soheilr/multi-client:latest
