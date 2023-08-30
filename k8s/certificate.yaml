@@ -4,11 +4,11 @@ metadata:
   name: rayatdoost-de-tls
 spec:
   secretName: rayatdoost-de
-  issureRef:
+  issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
   commonName: rayatdoost.de
   dnsNames:
     - rayatdoost.de
     - www.rayatdoost.de
-    
+
