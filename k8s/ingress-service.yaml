@@ -5,7 +5,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/use-regex: 'true'
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     cert-manager.io/certificate-name: "rayatdoost-de-tls"
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
