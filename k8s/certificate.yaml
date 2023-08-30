@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata::
+  name: rayatdoost-de-tls
+spec:
+  secretName: rayatdoost-de
+  issureRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: rayatdoost.de
+  dnsNames:
+    - rayatdoost.de
+    - www.rayatdoost.de
+  acme:
+    config:
+      - http01:
+          ingressClassName: nginx
+        domains:
+          - rayatdoost.de
+          - www.rayatdoost.de
