@@ -11,10 +11,4 @@ spec:
   dnsNames:
     - rayatdoost.de
     - www.rayatdoost.de
-  acme:
-    config:
-      - http01:
-          ingressClassName: nginx
-        domains:
-          - rayatdoost.de
-          - www.rayatdoost.de
+    
